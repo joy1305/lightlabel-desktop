@@ -22,6 +22,13 @@ $lg-next-prev-hover-color: $lg-icon-hover-color;
 $lg-toolbar-icon-color: $lg-icon-color;
 $lg-toolbar-icon-hover-color: $lg-icon-hover-color;
 
+// lablebar icons
+$lg-labelbar-bg: rgba(0, 0, 0, 0.45);
+$lg-labelbar-icon-color: $lg-icon-color;
+$lg-labelbar-icon-hover-color: $lg-icon-hover-color;
+$lg-label-selected-bg: ghostwhite;
+$lg-label-selected-color: black;
+
 // autoplay progress bar
 $lg-progress-bar-bg: #333;
 $lg-progress-bar-active-bg: $lg-theme-highlight;
@@ -45,6 +52,7 @@ $zindex-outer: 1050;
 $zindex-progressbar: 1080;
 $zindex-controls: 1080;
 $zindex-toolbar: 1080;
+$zindex-labelbar: 1080;
 $zindex-subhtml: 1080;
 $zindex-thumbnail: 1080;
 $zindex-pager: 1080;

@@ -6,6 +6,7 @@ import path from 'path';
 import { lightGallery } from './lightGallery/js/lightgallery.js';
 import { Thumbnail } from './lightGallery/js/lg-thumbnail.js';
 import { Zoom } from './lightGallery/js/lg-zoom.js';
+import { Label } from './lightGallery/js/lg-label.js';
 import { Autoplay } from './lightGallery/js/lg-autoplay.js';
 import { Pager } from './lightGallery/js/lg-pager.js';
 import { mousewheel } from './lightGallery/js/mousewheel.js';

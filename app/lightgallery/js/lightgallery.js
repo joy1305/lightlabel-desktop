@@ -286,6 +286,7 @@
             '<span class="lg-close lg-icon"></span>' +
             '</div>' +
             controls +
+            '<div class="lg-labelbar group">' +
             subHtmlCont +
             '</div>' +
             '</div>';

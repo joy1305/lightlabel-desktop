@@ -1,0 +1,50 @@
+
+
+// zoom buttons
+.lg-labels-yesno-group {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    padding: 10px;
+}
+
+.lg-label-yes {
+    opacity: 0.5;
+    pointer-events: auto;
+    &:after {
+        content: "正常";
+    }
+}
+
+.lg-label-no {
+    opacity: 0.5;
+    pointer-events: auto;
+    &:after {
+        content: "抑郁";
+    }
+}
+
+
+.lg-label-icon {
+    color: $lg-labelbar-icon-color;
+    cursor: pointer;
+    font-size: 24px;
+    height: 60px;
+    line-height: 27px;
+    padding: 10px 30px;
+    text-align: center;
+    width: 50px;
+    text-decoration: none !important;
+    outline: medium none;
+    &:hover {
+        color: $lg-toolbar-icon-hover-color;
+    }
+}
+
+.lg-label-selected  {
+    @extend .lg-label-icon;
+    opacity: 1;
+    pointer-events: none;
+    background-color: $lg-label-selected-bg;
+    color: $lg-label-selected-color;
+}
