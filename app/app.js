@@ -29,7 +29,7 @@ var defaults = {
     easing: 'linear',
     speed: 600,
     height: '100%',
-    width: '100%',
+    width: '80%',
     addClass: '',
     startClass: 'lg-start-zoom',
     backdropDuration: 0,

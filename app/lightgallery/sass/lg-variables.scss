@@ -23,10 +23,11 @@ $lg-toolbar-icon-color: $lg-icon-color;
 $lg-toolbar-icon-hover-color: $lg-icon-hover-color;
 
 // lablebar icons
-$lg-labelbar-bg: rgba(0, 0, 0, 0.45);
+$lg-labelbar-bg: rgba(47, 79, 79, 0.45);
 $lg-labelbar-icon-color: $lg-icon-color;
 $lg-labelbar-icon-hover-color: $lg-icon-hover-color;
-$lg-label-selected-bg: ghostwhite;
+$lg-label-yesno-selected-bg: ghostwhite;
+$lg-label-parts-selected-bg: rgba(180, 180, 180, 0.45);
 $lg-label-selected-color: black;
 
 // autoplay progress bar

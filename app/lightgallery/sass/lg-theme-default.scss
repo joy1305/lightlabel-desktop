@@ -129,41 +129,12 @@
 // lg labelbar
 .lg-labelbar {
     z-index: $zindex-labelbar;
-    left: 0;
     position: absolute;
-    top: 80%;
-    width: 100%;
+    left: 80%;
+    top: 0;
+    width: 20%;
+    height: 100%;
     background-color: $lg-labelbar-bg;
-
-    .lg-icon {
-        color: $lg-labelbar-icon-color;
-        cursor: pointer;
-        float: right;
-        font-size: 24px;
-        height: 47px;
-        line-height: 27px;
-        padding: 10px 0;
-        text-align: center;
-        width: 50px;
-        text-decoration: none !important;
-        outline: medium none;
-
-        &:hover {
-            color: $lg-labelbar-icon-hover-color;
-        }
-    }
-
-    .lg-close {
-        &:after {
-            content: "\e070";
-        }
-    }
-
-    .lg-download {
-        &:after {
-            content: "\e0f2";
-        }
-    }
 }
 
 // lightGallery title

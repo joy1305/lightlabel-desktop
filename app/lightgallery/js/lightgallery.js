@@ -16,7 +16,7 @@
         easing: 'linear',
         speed: 600,
         height: '100%',
-        width: '100%',
+        width: '80%',
         addClass: '',
         startClass: 'lg-start-zoom',
         backdropDuration: 150,
@@ -280,15 +280,14 @@
         }
 
         template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
+            '<div class="lg-labelbar group"></div>' +
             '<div class="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
             '<div class="lg-inner">' + list + '</div>' +
             '<div class="lg-toolbar group">' +
             '<span class="lg-close lg-icon"></span>' +
             '</div>' +
             controls +
-            '<div class="lg-labelbar group">' +
             subHtmlCont +
-            '</div>' +
             '</div>';
 
         $('body').append(template);

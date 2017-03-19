@@ -27,7 +27,7 @@ var defaults = {
     easing: 'linear',
     speed: 600,
     height: '100%',
-    width: '100%',
+    width: '80%',
     addClass: '',
     startClass: 'lg-start-zoom',
     backdropDuration: 0,
@@ -1403,7 +1403,8 @@ var setDevMenu = function() {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+R',
                 click: function() {
-                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
+                    mainWindow.webContents.send('refresh');
+                    // BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
                 }
             }, {
                 label: 'Toggle DevTools',

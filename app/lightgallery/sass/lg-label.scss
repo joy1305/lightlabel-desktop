@@ -1,30 +1,5 @@
 
 
-// zoom buttons
-.lg-labels-yesno-group {
-    width: 100%;
-    height: 80px;
-    text-align: center;
-    padding: 10px;
-}
-
-.lg-label-yes {
-    opacity: 0.5;
-    pointer-events: auto;
-    &:after {
-        content: "正常";
-    }
-}
-
-.lg-label-no {
-    opacity: 0.5;
-    pointer-events: auto;
-    &:after {
-        content: "抑郁";
-    }
-}
-
-
 .lg-label-icon {
     color: $lg-labelbar-icon-color;
     cursor: pointer;
@@ -34,6 +9,8 @@
     padding: 10px 30px;
     text-align: center;
     width: 50px;
+    opacity: 0.5;
+    pointer-events: auto;
     text-decoration: none !important;
     outline: medium none;
     &:hover {
@@ -41,10 +18,87 @@
     }
 }
 
-.lg-label-selected  {
+
+.lg-label-yesno-selected  {
     @extend .lg-label-icon;
     opacity: 1;
     pointer-events: none;
-    background-color: $lg-label-selected-bg;
+    background-color: $lg-label-yesno-selected-bg;
     color: $lg-label-selected-color;
+}
+
+// yes or no buttons
+.lg-labels-yesno-group {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px
+}
+
+.lg-label-yes {
+    @extend .lg-label-icon;
+    &:after {
+        content: "正常";
+    }
+}
+
+.lg-label-no {
+    @extend .lg-label-icon;
+    &:after {
+        content: "抑郁";
+    }
+}
+
+// parts buttons
+.lg-labels-parts-group {
+    width: 100%;
+    height: 100%;
+    top: 80px;
+    text-align: center;
+    padding: 10px;
+}
+
+.lg-label-part-icon {
+    @extend .lg-label-icon;
+    width: 100%;
+    height: 70px;
+    display: inline-block;
+    line-height:70px;
+}
+
+
+.lg-label-parts-selected  {
+    @extend .lg-label-part-icon;
+    opacity: 1;
+    background-color: $lg-label-parts-selected-bg;
+    color: $lg-label-selected-color;
+}
+
+.lg-label-forehead {
+    @extend .lg-label-part-icon;
+    &:after {
+        content: "额头";
+    }
+}
+
+.lg-label-eyes {
+    @extend .lg-label-part-icon;
+    &:after {
+        content: "双目";
+    }
+}
+
+.lg-label-mouth {
+    @extend .lg-label-part-icon;
+    &:after {
+        content: "嘴巴";
+    }
+}
+
+.lg-label-cheek {
+    @extend .lg-label-part-icon;
+    &:after {
+        content: "双颊";
+    }
 }

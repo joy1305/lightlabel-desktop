@@ -4,8 +4,7 @@
     {
       "name": "Debug Main Process",
       "type":"node",
-      "request": "attach",
-      "processId": "${command:PickProcess}",
+      "request": "launch",
       "protocol": "legacy"
     }
   ]
