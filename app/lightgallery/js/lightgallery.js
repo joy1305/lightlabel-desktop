@@ -741,9 +741,16 @@
         var _next = false;
         var _prev = false;
 
+        var _src;
+        if (_this.s.dynamic) {
+            _src = _this.s.dynamicEl[index].src;
+        } else {
+            _src = _this.$items.eq(index).attr('href') || _this.$items.eq(index).attr('data-src');
+
+        }
         if (!_this.lgBusy) {
 
-            this.$el.trigger('onBeforeSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+            this.$el.trigger('onBeforeSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
 
             _this.lgBusy = true;
 
@@ -825,7 +832,7 @@
                 _this.$slide.eq(touchNext).addClass('lg-next-slide');
                 _this.$slide.eq(index).addClass('lg-current');
             }
-
+            
             if (_this.lGalleryOn) {
                 setTimeout(function() {
                     _this.loadContent(index, true, 0);
@@ -833,14 +840,14 @@
 
                 setTimeout(function() {
                     _this.lgBusy = false;
-                    _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+                    _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
                 }, this.s.speed);
 
             } else {
                 _this.loadContent(index, true, _this.s.backdropDuration);
 
                 _this.lgBusy = false;
-                _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+                _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
             }
 
             if (this.s.download) {
