@@ -139,6 +139,7 @@ var loadFiles = function(dir, file) {
     fs.readdir(dir, function(err, files) {
         var _images = [];
         if (files && files.length) {
+            el = [];
             for (var i = 0; i < files.length; i++) {
                 if (path.extname(files[i]).toLowerCase() === '.jpg' || path.extname(files[i]).toLowerCase() === '.png' || path.extname(files[i]).toLowerCase() === '.gif' || path.extname(files[i]).toLowerCase() === '.webp') {
                     el.push({
