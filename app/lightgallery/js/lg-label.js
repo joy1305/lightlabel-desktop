@@ -300,10 +300,18 @@ import fs from 'fs';
             var pass = document.getElementById('login-pass').value;
             if(users.indexOf(user)===-1){
                 console.log("user not found" + user);
+                var x = document.getElementById("toast")
+                x.className = "show";
+                x.innerText = "User not found！";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                 return;
             }
             if(userPassMap[user] != pass){
                 console.log("increated password");
+                var x = document.getElementById("toast")
+                x.className = "show";
+                x.innerText = "Increated password！";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                 return;
             }
             curUser = user;
