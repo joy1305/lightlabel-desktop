@@ -1,11 +1,20 @@
 
-// yes or no buttons
+
 .lg-labels-user-group {
     width: 100%;
     height: 100px;
     padding: 10px;
     margin-top: 20px;
     background-color: rgba(74, 55, 55, 0.62)
+}
+
+.lg-labels-tucao-group {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    bottom: 0;
+    position: absolute;
 }
 
 .lg-label-text {
@@ -20,6 +29,11 @@
     pointer-events: auto;
     text-decoration: none !important;
     outline: medium none;
+}
+
+.lg-labels-tucao-text {
+    @extend .lg-label-text;
+    padding: 0 0;
 }
 
 .lg-label-user {
@@ -55,6 +69,9 @@
     pointer-events: none;
     background-color: $lg-label-yesno-selected-bg;
     color: $lg-label-selected-color;
+    &:hover {
+        color: black;
+    }
 }
 
 // yes or no buttons
@@ -63,7 +80,7 @@
     height: 80px;
     text-align: center;
     padding: 10px;
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .lg-label-yes {
@@ -71,12 +88,18 @@
     &:after {
         content: "正常";
     }
+    &:active  {
+        background-color:rgba(155, 155, 155, 0.62);
+    }
 }
 
 .lg-label-no {
     @extend .lg-label-icon;
     &:after {
         content: "抑郁";
+    }
+    &:active  {
+        background-color:rgba(155, 155, 155, 0.62);
     }
 }
 
