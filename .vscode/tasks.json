@@ -1,0 +1,14 @@
+{
+    "version": "0.1.0",
+    "command": "node",
+    "args": [],
+    "isShellCommand": true,
+    "showOutput": "always",
+    "suppressTaskName": true,
+    "tasks": [
+        {
+            "taskName": "startdebug",
+            "args": ["${workspaceRoot}/tasks/start"]
+        }
+    ]
+}

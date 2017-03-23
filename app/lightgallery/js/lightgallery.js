@@ -16,7 +16,7 @@
         easing: 'linear',
         speed: 600,
         height: '100%',
-        width: '100%',
+        width: '80%',
         addClass: '',
         startClass: 'lg-start-zoom',
         backdropDuration: 150,
@@ -280,6 +280,7 @@
         }
 
         template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
+            '<div class="lg-labelbar group"></div>' +
             '<div class="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
             '<div class="lg-inner">' + list + '</div>' +
             '<div class="lg-toolbar group">' +
@@ -287,7 +288,6 @@
             '</div>' +
             controls +
             subHtmlCont +
-            '</div>' +
             '</div>';
 
         $('body').append(template);
@@ -741,9 +741,16 @@
         var _next = false;
         var _prev = false;
 
+        var _src;
+        if (_this.s.dynamic) {
+            _src = _this.s.dynamicEl[index].src;
+        } else {
+            _src = _this.$items.eq(index).attr('href') || _this.$items.eq(index).attr('data-src');
+
+        }
         if (!_this.lgBusy) {
 
-            this.$el.trigger('onBeforeSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+            this.$el.trigger('onBeforeSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
 
             _this.lgBusy = true;
 
@@ -825,7 +832,7 @@
                 _this.$slide.eq(touchNext).addClass('lg-next-slide');
                 _this.$slide.eq(index).addClass('lg-current');
             }
-
+            
             if (_this.lGalleryOn) {
                 setTimeout(function() {
                     _this.loadContent(index, true, 0);
@@ -833,14 +840,14 @@
 
                 setTimeout(function() {
                     _this.lgBusy = false;
-                    _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+                    _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
                 }, this.s.speed);
 
             } else {
                 _this.loadContent(index, true, _this.s.backdropDuration);
 
                 _this.lgBusy = false;
-                _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb]);
+                _this.$el.trigger('onAfterSlide.lg', [_prevIndex, index, fromTouch, fromThumb, _src]);
             }
 
             if (this.s.download) {
