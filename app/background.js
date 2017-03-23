@@ -113,7 +113,9 @@ var defaults = {
     loadVimeoThumbnail: true,
     vimeoThumbSize: 'thumbnail_small',
 
-    loadDailymotionThumbnail: true
+    loadDailymotionThumbnail: true,
+
+    tucaoMode: true
 };
 
 // Update lightgallery conifg files
@@ -178,6 +180,16 @@ var setDevMenu = function() {
                 }, function(directory) {
                     mainWindow.webContents.send('openDirectory', directory);
                 });
+            }
+        }]
+    },{
+        label: 'Mode',
+        submenu: [{
+            label: 'tucao',
+            type: 'checkbox',
+            checked: defaults.tucaoMode,
+            click: function(menuItem) {
+                updateConfig('tucaoMode', menuItem.checked);
             }
         }]
     }, {

@@ -114,7 +114,9 @@ var defaults = {
     loadVimeoThumbnail: true,
     vimeoThumbSize: 'thumbnail_small',
 
-    loadDailymotionThumbnail: true
+    loadDailymotionThumbnail: true,
+
+    tucaoMode: true
 };
 
 // Write settings to config file

@@ -548,7 +548,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   margin-top: 20px;
   background-color: rgba(74, 55, 55, 0.62); }
 
-.lg-label-text, .lg-label-icon, .lg-label-yesno-selected, .lg-label-yes, .lg-label-no, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
+.lg-labels-tucao-group {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 20px;
+  bottom: 0;
+  position: absolute; }
+
+.lg-label-text, .lg-labels-tucao-text, .lg-label-icon, .lg-label-yesno-selected, .lg-label-yes, .lg-label-no, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
   color: #999;
   font-size: 24px;
   height: 60px;
@@ -560,6 +568,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   pointer-events: auto;
   text-decoration: none !important;
   outline: medium none; }
+
+.lg-labels-tucao-text {
+  padding: 0 0; }
 
 .lg-label-user {
   color: #999;
@@ -587,6 +598,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   pointer-events: none;
   background-color: ghostwhite;
   color: black; }
+  .lg-label-yesno-selected:hover {
+    color: black; }
 
 .lg-labels-yesno-group {
   width: 100%;
@@ -598,8 +611,14 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .lg-label-yes:after {
   content: "正常"; }
 
+.lg-label-yes:active {
+  background-color: rgba(155, 155, 155, 0.62); }
+
 .lg-label-no:after {
   content: "抑郁"; }
+
+.lg-label-no:active {
+  background-color: rgba(155, 155, 155, 0.62); }
 
 .lg-labels-parts-group {
   width: 100%;

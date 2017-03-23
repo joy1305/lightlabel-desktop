@@ -7,12 +7,31 @@ import fs from 'fs';
     var users = ["sunwei"];
     var userPassMap = {};
     
+    var tucaoUncertain = ["好担心好害怕","你给我小心点！"];
+    var tucaoYes = ["原来我没有病","你确定吗？我妈都说我有问题","原来我很正常啊，我一直以为自己有病呢!","太好了，给你一个赞！"];
+    var tucaoNo = ["你才抑郁，你们XX都抑郁","你确定你自己没问题吗?","我完了,我要抑郁了!","我要找个地方去上吊!","我要去医闹!","我很桑心"];
+    var tucaoParts = ["就你长得好看!","我知道了，你就是看我不顺眼","别挑我毛病了，看看你自己就长得好吗？"];
     var initUserAccount = function (){
         userPassMap["sunwei"] = "1q2w3e4r";
     }
+
+    function randomNum(minNum,maxNum){ 
+        switch(arguments.length){ 
+            case 1: 
+                return parseInt(Math.random()*minNum+1); 
+                break; 
+            case 2: 
+                return parseInt(Math.random()*(maxNum-minNum+1)+minNum); 
+                break; 
+            default: 
+                return 0; 
+                break; 
+    } 
+} 
     
     var defaults = {
-        label: true
+        label: true,
+        tucaoMode: true
     };
 
     function newLabel(){
@@ -95,6 +114,17 @@ import fs from 'fs';
         } else {
             $labelcheek.removeClass('lg-label-parts-selected');
         }
+        this.updateTuCao(tucaoUncertain);
+    }
+
+    Label.prototype.updateTuCao = function (caoStrs) {
+        if(this.core.s.tucaoMode){
+            var index = randomNum(0, caoStrs.length - 1);
+            var caoStr = caoStrs[index];
+            var $labelBar = this.core.$outer.find('.lg-labelbar');
+            var $labelTucao = $labelBar.find('.lg-labels-tucao-text');
+            $labelTucao.text(caoStr);
+        }
     }
 
     Label.prototype.init = function () {
@@ -127,9 +157,23 @@ import fs from 'fs';
                             <br/>\
                             <span id="lg-label-user" class="lg-label-user">'+curUser+'</span>\
                         </div>';
-        var labelYesNoIcons = '<div class="lg-labels-yesno-group"><span class="lg-label-yes"></span><span class="lg-label-no"></span></div>';
+        var labelTucao = '<div class="lg-labels-tucao-group">\
+                            <span class="lg-labels-tucao-text"></span>\
+                        </div>';
+        var labelYesNoIcons = '<div class="lg-labels-yesno-group">\
+                                    <span class="lg-label-yes"></span>\
+                                    <span class="lg-label-no"></span>\
+                                </div>';
+        var labelPartsIcon = '<div class="lg-labels-parts-group">\
+                                    <span class="lg-label-forehead"></span>\
+                                    <span class="lg-label-eyes"></span>\
+                                    <span class="lg-label-mouth"></span>\
+                                    <span class="lg-label-cheek"></span>\
+                            </div>';
         $labelBar.append(userName);
         $labelBar.append(labelYesNoIcons);
+        $labelBar.append(labelPartsIcon);
+        $labelBar.append(labelTucao);
         var $labeluser = $labelBar.find('.lg-label-user');
         var $labelyes = $labelBar.find('.lg-label-yes');
         var $labelno = $labelBar.find('.lg-label-no');
@@ -146,6 +190,7 @@ import fs from 'fs';
             curLabel.no = false;
             $labelyes.addClass('lg-label-yesno-selected');
             $labelno.removeClass('lg-label-yesno-selected');
+            _this.updateTuCao(tucaoYes);
             writeLabel();
         });
         $labelno.on('click.lg', function () {
@@ -158,15 +203,9 @@ import fs from 'fs';
             $labelyes.removeClass('lg-label-yesno-selected');
             $labelno.addClass('lg-label-yesno-selected');
             writeLabel();
+            _this.updateTuCao(tucaoNo);
         });
 
-        var labelPartsIcon = '<div class="lg-labels-parts-group">\
-            <span class="lg-label-forehead"></span>\
-            <span class="lg-label-eyes"></span>\
-            <span class="lg-label-mouth"></span>\
-            <span class="lg-label-cheek"></span>\
-        </div>';
-        $labelBar.append(labelPartsIcon);
         var $labelforehead = $labelBar.find('.lg-label-forehead');
         var $labeleyes = $labelBar.find('.lg-label-eyes');
         var $labelmouth = $labelBar.find('.lg-label-mouth');
@@ -177,13 +216,14 @@ import fs from 'fs';
             if(checkAccount(false) === false){
                 return;
             }
-            label.forehead = !label.forehead;
-            if (label.forehead) {
+            curLabel.forehead = !curLabel.forehead;
+            if (curLabel.forehead) {
                 $labelforehead.addClass('lg-label-parts-selected');
             } else {
                 $labelforehead.removeClass('lg-label-parts-selected');
             }
             writeLabel();
+            _this.updateTuCao(tucaoParts);
         });
         $labeleyes.on('click.lg', function () {
             console.log("label eyes");
@@ -197,6 +237,7 @@ import fs from 'fs';
                 $labeleyes.removeClass('lg-label-parts-selected');
             }
             writeLabel();
+            _this.updateTuCao(tucaoParts);
         });
         $labelmouth.on('click.lg', function () {
             console.log("label mouth");
@@ -210,6 +251,7 @@ import fs from 'fs';
                 $labelmouth.removeClass('lg-label-parts-selected');
             }
             writeLabel();
+            _this.updateTuCao(tucaoParts);
         });
         $labelcheek.on('click.lg', function () {
             console.log("label cheek");
@@ -223,7 +265,10 @@ import fs from 'fs';
                 $labelcheek.removeClass('lg-label-parts-selected');
             }
             writeLabel();
+            _this.updateTuCao(tucaoParts);
         });
+
+        
     };
 
     Label.prototype.destroy = function () {
