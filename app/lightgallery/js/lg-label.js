@@ -82,6 +82,8 @@ import fs from 'fs';
         var $labeleyes = $labelBar.find('.lg-label-eyes');
         var $labelmouth = $labelBar.find('.lg-label-mouth');
         var $labelcheek = $labelBar.find('.lg-label-cheek');
+        var $labelparts = $labelBar.find('.lg-labels-parts-group');
+        $labelparts.css('visibility', 'hidden');
         if (curLabel.yes) {
             $labelyes.addClass('lg-label-yesno-selected');
             $labelno.removeClass('lg-label-yesno-selected');
@@ -91,6 +93,7 @@ import fs from 'fs';
         if (curLabel.no) {
             $labelyes.removeClass('lg-label-yesno-selected');
             $labelno.addClass('lg-label-yesno-selected');
+            $labelparts.css('visibility', 'visible');
         }else{
             $labelno.removeClass('lg-label-yesno-selected');
         }
@@ -177,6 +180,7 @@ import fs from 'fs';
         var $labeluser = $labelBar.find('.lg-label-user');
         var $labelyes = $labelBar.find('.lg-label-yes');
         var $labelno = $labelBar.find('.lg-label-no');
+        var $labelparts = $labelBar.find('.lg-labels-parts-group');
         $labeluser.on('click.lg', function () {
             console.log("label user");
             checkAccount(true);
@@ -191,6 +195,7 @@ import fs from 'fs';
             $labelyes.addClass('lg-label-yesno-selected');
             $labelno.removeClass('lg-label-yesno-selected');
             _this.updateTuCao(tucaoYes);
+            $labelparts.css('visibility', 'hidden');
             writeLabel();
         });
         $labelno.on('click.lg', function () {
@@ -202,6 +207,7 @@ import fs from 'fs';
             curLabel.no = true;
             $labelyes.removeClass('lg-label-yesno-selected');
             $labelno.addClass('lg-label-yesno-selected');
+            $labelparts.css('visibility', 'visible');
             writeLabel();
             _this.updateTuCao(tucaoNo);
         });
