@@ -677,7 +677,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   height: 100%;
   top: 80px;
   text-align: center;
-  padding: 10px; }
+  padding: 10px;
+  visibility: hidden; }
 
 .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
   width: 100%;
