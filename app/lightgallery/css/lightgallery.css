@@ -641,7 +641,12 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     color: #FFF; }
 
 .lg-label-icon, .lg-label-yesno-selected, .lg-label-yes, .lg-label-no, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden; }
   .lg-label-icon:hover, .lg-label-yesno-selected:hover, .lg-label-yes:hover, .lg-label-no:hover, .lg-label-part-icon:hover, .lg-label-parts-selected:hover, .lg-label-forehead:hover, .lg-label-eyes:hover, .lg-label-mouth:hover, .lg-label-cheek:hover {
     color: #FFF; }
 
@@ -689,7 +694,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .lg-label-parts-selected {
   opacity: 1;
   background-color: rgba(180, 180, 180, 0.45);
-  color: black; }
+  color: whitesmoke; }
 
 .lg-label-forehead:after {
   content: "额头"; }
