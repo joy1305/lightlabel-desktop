@@ -57,11 +57,14 @@
 .lg-label-icon {
     @extend .lg-label-text;
     cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
     &:hover {
         color: $lg-toolbar-icon-hover-color;
     }
 }
-
 
 .lg-label-yesno-selected  {
     @extend .lg-label-icon;
@@ -126,7 +129,7 @@
     @extend .lg-label-part-icon;
     opacity: 1;
     background-color: $lg-label-parts-selected-bg;
-    color: $lg-label-selected-color;
+    color: whitesmoke;
 }
 
 .lg-label-forehead {
