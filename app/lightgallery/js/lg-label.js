@@ -152,7 +152,6 @@ import { remote } from 'electron';
             fs.readFile(fileAll, function (err, data) {
                 if (err) {
                     curLabel = newLabel();
-                    writeLabel();
                 } else {
                     curLabel = JSON.parse(data);
                 }
