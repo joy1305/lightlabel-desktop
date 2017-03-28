@@ -143,7 +143,7 @@ var loadFiles = function(dir, file) {
         if (files && files.length) {
             el = [];
             for (var i = 0; i < files.length; i++) {
-                if (path.extname(files[i]).toLowerCase() === '.jpg' || path.extname(files[i]).toLowerCase() === '.png' || path.extname(files[i]).toLowerCase() === '.gif' || path.extname(files[i]).toLowerCase() === '.webp') {
+                if (path.extname(files[i]).toLowerCase() === '.jpg' || path.extname(files[i]).toLowerCase() === '.png' || path.extname(files[i]).toLowerCase() === '.gif' || path.extname(files[i]).toLowerCase() === '.webp'|| path.extname(files[i]).toLowerCase() === '.jpeg') {
                     el.push({
                         src: dir + '/' + files[i],
                         thumb: './lightgallery/img/lg-default.png'
