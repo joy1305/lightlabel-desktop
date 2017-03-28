@@ -116,7 +116,7 @@ var defaults = {
 
     loadDailymotionThumbnail: true,
 
-    tucaoMode: true
+    tucaoMode: false
 };
 
 // Write settings to config file

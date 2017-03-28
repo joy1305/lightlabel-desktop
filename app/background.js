@@ -115,7 +115,7 @@ var defaults = {
 
     loadDailymotionThumbnail: true,
 
-    tucaoMode: true
+    tucaoMode: false
 };
 
 // Update lightgallery conifg files

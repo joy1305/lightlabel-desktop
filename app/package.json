@@ -1,10 +1,10 @@
 {
-  "name": "lightgallery",
-  "productName": "Lightgallery",
-  "identifier": "lightgallery-desktop",
-  "description": "A modern, electron and nodejs based image viewer for Mac, Windows and Linux.",
-  "version": "0.1.1",
-  "author": "Sachin N <sachi77n@gmail.com>",
+  "name": "lightLabel",
+  "productName": "lightLabel",
+  "identifier": "lightLabel-desktop",
+  "description": "A modern, electron and nodejs based label system for Mac, Windows and Linux.",
+  "version": "1.0.0",
+  "author": "johney <joy1305@126.com>",
   "main": "background.js",
   "dependencies": {
     "configstore": "^1.4.0",

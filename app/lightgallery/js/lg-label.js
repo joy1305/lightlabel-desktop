@@ -33,7 +33,7 @@ import { remote } from 'electron';
 
     var defaults = {
         label: true,
-        tucaoMode: true,
+        tucaoMode: false,
     };
 
     var userData = {
