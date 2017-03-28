@@ -86,7 +86,7 @@
     margin-top: 50px;
 }
 
-.lg-label-yes {
+.lg-label-normal {
     @extend .lg-label-icon;
     &:after {
         content: "正常";
@@ -96,7 +96,7 @@
     }
 }
 
-.lg-label-no {
+.lg-label-depressed {
     @extend .lg-label-icon;
     &:after {
         content: "抑郁";

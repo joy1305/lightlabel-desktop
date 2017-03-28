@@ -9,8 +9,8 @@ import { remote } from 'electron';
     var userPassMap = {};
 
     var tucaoUncertain = ["好担心好害怕", "你给我小心点！"];
-    var tucaoYes = ["原来我没有病", "你确定吗？我妈都说我有问题", "原来我很正常啊，我一直以为自己有病呢!", "太好了，给你一个赞！"];
-    var tucaoNo = ["你才抑郁，你们XX都抑郁", "你确定你自己没问题吗?", "我完了,我要抑郁了!", "我要找个地方去上吊!", "我要去医闹!", "我很桑心"];
+    var tucaonormal = ["原来我没有病", "你确定吗？我妈都说我有问题", "原来我很正常啊，我一直以为自己有病呢!", "太好了，给你一个赞！"];
+    var tucaodepressed = ["你才抑郁，你们XX都抑郁", "你确定你自己没问题吗?", "我完了,我要抑郁了!", "我要找个地方去上吊!", "我要去医闹!", "我很桑心"];
     var tucaoParts = ["就你长得好看!", "我知道了，你就是看我不顺眼", "别挑我毛病了，看看你自己就长得好吗？"];
     var initUserAccount = function () {
         userPassMap["sunwei"] = "1q2w3e4r";
@@ -42,8 +42,8 @@ import { remote } from 'electron';
 
     function newLabel() {
         return {
-            yes: false,
-            no: false,
+            normal: false,
+            depressed: false,
             forehead: false,
             eyes: false,
             mouth: false,
@@ -82,26 +82,26 @@ import { remote } from 'electron';
 
     Label.prototype.updateUI = function () {
         var $labelBar = this.core.$outer.find('.lg-labelbar');
-        var $labelyes = $labelBar.find('.lg-label-yes');
-        var $labelno = $labelBar.find('.lg-label-no');
+        var $labelnormal = $labelBar.find('.lg-label-normal');
+        var $labeldepressed = $labelBar.find('.lg-label-depressed');
         var $labelforehead = $labelBar.find('.lg-label-forehead');
         var $labeleyes = $labelBar.find('.lg-label-eyes');
         var $labelmouth = $labelBar.find('.lg-label-mouth');
         var $labelcheek = $labelBar.find('.lg-label-cheek');
         var $labelparts = $labelBar.find('.lg-labels-parts-group');
         $labelparts.css('visibility', 'hidden');
-        if (curLabel.yes) {
-            $labelyes.addClass('lg-label-yesno-selected');
-            $labelno.removeClass('lg-label-yesno-selected');
+        if (curLabel.normal) {
+            $labelnormal.addClass('lg-label-yesno-selected');
+            $labeldepressed.removeClass('lg-label-yesno-selected');
         } else {
-            $labelyes.removeClass('lg-label-yesno-selected');
+            $labelnormal.removeClass('lg-label-yesno-selected');
         }
-        if (curLabel.no) {
-            $labelyes.removeClass('lg-label-yesno-selected');
-            $labelno.addClass('lg-label-yesno-selected');
+        if (curLabel.depressed) {
+            $labelnormal.removeClass('lg-label-yesno-selected');
+            $labeldepressed.addClass('lg-label-yesno-selected');
             $labelparts.css('visibility', 'visible');
         } else {
-            $labelno.removeClass('lg-label-yesno-selected');
+            $labeldepressed.removeClass('lg-label-yesno-selected');
         }
         if (curLabel.forehead) {
             $labelforehead.addClass('lg-label-parts-selected');
@@ -169,8 +169,8 @@ import { remote } from 'electron';
                             <span class="lg-labels-tucao-text"></span>\
                         </div>';
         var labelYesNoIcons = '<div class="lg-labels-yesno-group">\
-                                    <span class="lg-label-yes"></span>\
-                                    <span class="lg-label-no"></span>\
+                                    <span class="lg-label-normal"></span>\
+                                    <span class="lg-label-depressed"></span>\
                                 </div>';
         var labelPartsIcon = '<div class="lg-labels-parts-group">\
                                     <span class="lg-label-forehead"></span>\
@@ -183,38 +183,38 @@ import { remote } from 'electron';
         $labelBar.append(labelPartsIcon);
         $labelBar.append(labelTucao);
         var $labeluser = $labelBar.find('.lg-label-user');
-        var $labelyes = $labelBar.find('.lg-label-yes');
-        var $labelno = $labelBar.find('.lg-label-no');
+        var $labelnormal = $labelBar.find('.lg-label-normal');
+        var $labeldepressed = $labelBar.find('.lg-label-depressed');
         var $labelparts = $labelBar.find('.lg-labels-parts-group');
         $labeluser.on('click.lg', function () {
             console.log("label user");
             checkAccount(true);
         });
-        $labelyes.on('click.lg', function () {
-            console.log("label yes");
+        $labelnormal.on('click.lg', function () {
+            console.log("label normal");
             if (checkAccount(false) === false) {
                 return;
             }
-            curLabel.yes = true;
-            curLabel.no = false;
-            $labelyes.addClass('lg-label-yesno-selected');
-            $labelno.removeClass('lg-label-yesno-selected');
-            _this.updateTuCao(tucaoYes);
+            curLabel.normal = true;
+            curLabel.depressed = false;
+            $labelnormal.addClass('lg-label-yesno-selected');
+            $labeldepressed.removeClass('lg-label-yesno-selected');
+            _this.updateTuCao(tucaonormal);
             $labelparts.css('visibility', 'hidden');
             writeLabel();
         });
-        $labelno.on('click.lg', function () {
-            console.log("label no");
+        $labeldepressed.on('click.lg', function () {
+            console.log("label depressed");
             if (checkAccount(false) === false) {
                 return;
             }
-            curLabel.yes = false;
-            curLabel.no = true;
-            $labelyes.removeClass('lg-label-yesno-selected');
-            $labelno.addClass('lg-label-yesno-selected');
+            curLabel.normal = false;
+            curLabel.depressed = true;
+            $labelnormal.removeClass('lg-label-yesno-selected');
+            $labeldepressed.addClass('lg-label-yesno-selected');
             $labelparts.css('visibility', 'visible');
             writeLabel();
-            _this.updateTuCao(tucaoNo);
+            _this.updateTuCao(tucaodepressed);
         });
 
         var $labelforehead = $labelBar.find('.lg-label-forehead');
@@ -360,6 +360,7 @@ import { remote } from 'electron';
             if (err) throw err;
             userData = JSON.parse(data);
             curUser = userData.user;
+            updateFileAll();
             var userDom = document.getElementById('lg-label-user');
             userDom.innerText = curUser;
         });
