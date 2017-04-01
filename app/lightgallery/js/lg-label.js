@@ -61,6 +61,17 @@ import { remote } from 'electron';
         });
     }
 
+    var readLable = function (labelThis){
+        fs.readFile(fileAll, function (err, data) {
+            if (err) {
+                curLabel = newLabel();
+            } else {
+                curLabel = JSON.parse(data);
+            }
+            labelThis.updateUI();
+            });
+    }
+
     var updateFileAll = function () {
         fileAll = filePath + curUser + "_" + fileName + '.json';
     }
@@ -149,14 +160,7 @@ import { remote } from 'electron';
             fileName = filePathName.slice(pos + 1);
             filePath = filePathName.slice(0, pos + 1);
             updateFileAll();
-            fs.readFile(fileAll, function (err, data) {
-                if (err) {
-                    curLabel = newLabel();
-                } else {
-                    curLabel = JSON.parse(data);
-                }
-                _this.updateUI();
-            });
+            readLable(_this);
         });
 
         var $labelBar = this.core.$outer.find('.lg-labelbar');
@@ -336,7 +340,8 @@ import { remote } from 'electron';
             }else{
                 clearUser();
             }
-            
+            var _this = ($('.lightgallery').data('lightGallery')).modules['label'];
+            readLable(_this);
         }
     }
 
@@ -363,6 +368,8 @@ import { remote } from 'electron';
             updateFileAll();
             var userDom = document.getElementById('lg-label-user');
             userDom.innerText = curUser;
+            var _this = ($('.lightgallery').data('lightGallery')).modules['label'];
+            readLable(_this);
         });
     }
 
