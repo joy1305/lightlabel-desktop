@@ -608,7 +608,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   bottom: 0;
   position: absolute; }
 
-.lg-label-text, .lg-labels-tucao-text, .lg-label-icon, .lg-label-yesno-selected, .lg-label-normal, .lg-label-depressed, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
+.lg-label-text, .lg-labels-tucao-text, .lg-label-icon, .lg-label-result-selected, .lg-label-result-icon, .lg-label-normal, .lg-label-depressed, .lg-label-uncertain, .lg-label-iqproblem, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
   color: #999;
   font-size: 24px;
   height: 60px;
@@ -640,42 +640,45 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   .lg-label-user:hover {
     color: #FFF; }
 
-.lg-label-icon, .lg-label-yesno-selected, .lg-label-normal, .lg-label-depressed, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
+.lg-label-icon, .lg-label-result-selected, .lg-label-result-icon, .lg-label-normal, .lg-label-depressed, .lg-label-uncertain, .lg-label-iqproblem, .lg-label-part-icon, .lg-label-parts-selected, .lg-label-forehead, .lg-label-eyes, .lg-label-mouth, .lg-label-cheek {
   cursor: pointer;
   -webkit-transition-duration: 0.4s;
   /* Safari */
   transition-duration: 0.4s;
   text-decoration: none;
   overflow: hidden; }
-  .lg-label-icon:hover, .lg-label-yesno-selected:hover, .lg-label-normal:hover, .lg-label-depressed:hover, .lg-label-part-icon:hover, .lg-label-parts-selected:hover, .lg-label-forehead:hover, .lg-label-eyes:hover, .lg-label-mouth:hover, .lg-label-cheek:hover {
+  .lg-label-icon:hover, .lg-label-result-selected:hover, .lg-label-result-icon:hover, .lg-label-normal:hover, .lg-label-depressed:hover, .lg-label-uncertain:hover, .lg-label-iqproblem:hover, .lg-label-part-icon:hover, .lg-label-parts-selected:hover, .lg-label-forehead:hover, .lg-label-eyes:hover, .lg-label-mouth:hover, .lg-label-cheek:hover {
     color: #FFF; }
 
-.lg-label-yesno-selected {
+.lg-label-result-selected {
   opacity: 1;
   pointer-events: none;
   background-color: ghostwhite;
   color: black; }
-  .lg-label-yesno-selected:hover {
+  .lg-label-result-selected:hover {
     color: black; }
 
-.lg-labels-yesno-group {
+.lg-labels-result-group {
   width: 100%;
   height: 80px;
   text-align: center;
   padding: 10px;
-  margin-top: 50px; }
+  margin-top: 10px; }
+
+.lg-label-result-icon:active, .lg-label-normal:active, .lg-label-depressed:active, .lg-label-uncertain:active, .lg-label-iqproblem:active {
+  background-color: rgba(155, 155, 155, 0.62); }
 
 .lg-label-normal:after {
   content: "正常"; }
 
-.lg-label-normal:active {
-  background-color: rgba(155, 155, 155, 0.62); }
-
 .lg-label-depressed:after {
   content: "抑郁"; }
 
-.lg-label-depressed:active {
-  background-color: rgba(155, 155, 155, 0.62); }
+.lg-label-uncertain:after {
+  content: "不确定"; }
+
+.lg-label-iqproblem:after {
+  content: "智力问题"; }
 
 .lg-labels-parts-group {
   width: 100%;

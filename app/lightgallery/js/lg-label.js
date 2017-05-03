@@ -5,12 +5,13 @@ import { remote } from 'electron';
     'use strict';
 
     var curUser = "";
-    var users = ["sunwei","test"];
+    var users = ["sunwei", "test"];
     var userPassMap = {};
 
-    var tucaoUncertain = ["好担心好害怕", "你给我小心点！"];
     var tucaonormal = ["原来我没有病", "你确定吗？我妈都说我有问题", "原来我很正常啊，我一直以为自己有病呢!", "太好了，给你一个赞！"];
+    var tucaouncertain = ["好担心好害怕", "你给我小心点！", "看不出来吧，其实我没病"];
     var tucaodepressed = ["你才抑郁，你们XX都抑郁", "你确定你自己没问题吗?", "我完了,我要抑郁了!", "我要找个地方去上吊!", "我要去医闹!", "我很桑心"];
+    var tucaoiqproblem = ["啊，我说我怎么学习不好", "感觉被鄙视了"];
     var tucaoParts = ["就你长得好看!", "我知道了，你就是看我不顺眼", "别挑我毛病了，看看你自己就长得好吗？"];
     var initUserAccount = function () {
         userPassMap["sunwei"] = "1q2w3e4r";
@@ -44,6 +45,8 @@ import { remote } from 'electron';
         return {
             normal: false,
             depressed: false,
+            uncertain: true,
+            iqproblem: false,
             forehead: false,
             eyes: false,
             mouth: false,
@@ -61,7 +64,7 @@ import { remote } from 'electron';
         });
     }
 
-    var readLable = function (labelThis){
+    var readLable = function (labelThis) {
         fs.readFile(fileAll, function (err, data) {
             if (err) {
                 curLabel = newLabel();
@@ -69,7 +72,7 @@ import { remote } from 'electron';
                 curLabel = JSON.parse(data);
             }
             labelThis.updateUI();
-            });
+        });
     }
 
     var updateFileAll = function () {
@@ -95,46 +98,55 @@ import { remote } from 'electron';
         var $labelBar = this.core.$outer.find('.lg-labelbar');
         var $labelnormal = $labelBar.find('.lg-label-normal');
         var $labeldepressed = $labelBar.find('.lg-label-depressed');
+        var $labeluncertain = $labelBar.find('.lg-label-uncertain');
+        var $labeliqproblem = $labelBar.find('.lg-label-iqproblem');
         var $labelforehead = $labelBar.find('.lg-label-forehead');
         var $labeleyes = $labelBar.find('.lg-label-eyes');
         var $labelmouth = $labelBar.find('.lg-label-mouth');
         var $labelcheek = $labelBar.find('.lg-label-cheek');
         var $labelparts = $labelBar.find('.lg-labels-parts-group');
         $labelparts.css('visibility', 'hidden');
+        $labelnormal.removeClass('lg-label-result-selected');
+        $labeldepressed.removeClass('lg-label-result-selected');
+        $labeluncertain.removeClass('lg-label-result-selected');
+        $labeliqproblem.removeClass('lg-label-result-selected');
         if (curLabel.normal) {
-            $labelnormal.addClass('lg-label-yesno-selected');
-            $labeldepressed.removeClass('lg-label-yesno-selected');
-        } else {
-            $labelnormal.removeClass('lg-label-yesno-selected');
+            $labelnormal.addClass('lg-label-result-selected');
         }
         if (curLabel.depressed) {
-            $labelnormal.removeClass('lg-label-yesno-selected');
-            $labeldepressed.addClass('lg-label-yesno-selected');
+            $labeldepressed.addClass('lg-label-result-selected');
             $labelparts.css('visibility', 'visible');
-        } else {
-            $labeldepressed.removeClass('lg-label-yesno-selected');
         }
-        if (curLabel.forehead) {
-            $labelforehead.addClass('lg-label-parts-selected');
-        } else {
-            $labelforehead.removeClass('lg-label-parts-selected');
+        if (curLabel.uncertain) {
+            $labeluncertain.addClass('lg-label-result-selected');
         }
-        if (curLabel.eyes) {
-            $labeleyes.addClass('lg-label-parts-selected');
-        } else {
-            $labeleyes.removeClass('lg-label-parts-selected');
+        if (curLabel.iqproblem) {
+            $labeliqproblem.addClass('lg-label-result-selected');
+            $labelparts.css('visibility', 'visible');
         }
-        if (curLabel.mouth) {
-            $labelmouth.addClass('lg-label-parts-selected');
-        } else {
-            $labelmouth.removeClass('lg-label-parts-selected');
+        if (curLabel.depressed || curLabel.iqproblem) {
+            if (curLabel.forehead) {
+                $labelforehead.addClass('lg-label-parts-selected');
+            } else {
+                $labelforehead.removeClass('lg-label-parts-selected');
+            }
+            if (curLabel.eyes) {
+                $labeleyes.addClass('lg-label-parts-selected');
+            } else {
+                $labeleyes.removeClass('lg-label-parts-selected');
+            }
+            if (curLabel.mouth) {
+                $labelmouth.addClass('lg-label-parts-selected');
+            } else {
+                $labelmouth.removeClass('lg-label-parts-selected');
+            }
+            if (curLabel.cheek) {
+                $labelcheek.addClass('lg-label-parts-selected');
+            } else {
+                $labelcheek.removeClass('lg-label-parts-selected');
+            }
         }
-        if (curLabel.cheek) {
-            $labelcheek.addClass('lg-label-parts-selected');
-        } else {
-            $labelcheek.removeClass('lg-label-parts-selected');
-        }
-        this.updateTuCao(tucaoUncertain);
+        this.updateTuCao(tucaouncertain);
     }
 
     Label.prototype.updateTuCao = function (caoStrs) {
@@ -172,9 +184,13 @@ import { remote } from 'electron';
         var labelTucao = '<div class="lg-labels-tucao-group">\
                             <span class="lg-labels-tucao-text"></span>\
                         </div>';
-        var labelYesNoIcons = '<div class="lg-labels-yesno-group">\
+        var labelResultIcons = '<div class="lg-labels-result-group">\
+                                    <span class="lg-label-uncertain"></span>\
                                     <span class="lg-label-normal"></span>\
+                                </div>';
+        var labelResult2Icons = '<div class="lg-labels-result-group">\
                                     <span class="lg-label-depressed"></span>\
+                                    <span class="lg-label-iqproblem"></span>\
                                 </div>';
         var labelPartsIcon = '<div class="lg-labels-parts-group">\
                                     <span class="lg-label-forehead"></span>\
@@ -183,12 +199,39 @@ import { remote } from 'electron';
                                     <span class="lg-label-cheek"></span>\
                             </div>';
         $labelBar.append(userName);
-        $labelBar.append(labelYesNoIcons);
+        $labelBar.append(labelResultIcons);
+        $labelBar.append(labelResult2Icons);
         $labelBar.append(labelPartsIcon);
         $labelBar.append(labelTucao);
         var $labeluser = $labelBar.find('.lg-label-user');
         var $labelnormal = $labelBar.find('.lg-label-normal');
         var $labeldepressed = $labelBar.find('.lg-label-depressed');
+        var $labeluncertain = $labelBar.find('.lg-label-uncertain');
+        var $labeliqproblem = $labelBar.find('.lg-label-iqproblem');
+        var $labelforehead = $labelBar.find('.lg-label-forehead');
+        var $labeleyes = $labelBar.find('.lg-label-eyes');
+        var $labelmouth = $labelBar.find('.lg-label-mouth');
+        var $labelcheek = $labelBar.find('.lg-label-cheek');
+        var clearLabelReusult = function () {
+            curLabel.normal = false;
+            curLabel.depressed = false;
+            curLabel.uncertain = false;
+            curLabel.iqproblem = false;
+            $labelnormal.removeClass('lg-label-result-selected');
+            $labeldepressed.removeClass('lg-label-result-selected');
+            $labeluncertain.removeClass('lg-label-result-selected');
+            $labeliqproblem.removeClass('lg-label-result-selected');
+        };
+        var clearLabelParts = function (){
+            curLabel.cheek = false;
+            curLabel.eyes = false;
+            curLabel.forehead = false;
+            curLabel.mouth = false;
+            $labelforehead.removeClass('lg-label-parts-selected');
+            $labeleyes.removeClass('lg-label-parts-selected');
+            $labelmouth.removeClass('lg-label-parts-selected');
+            $labelcheek.removeClass('lg-label-parts-selected');
+        }
         var $labelparts = $labelBar.find('.lg-labels-parts-group');
         $labeluser.on('click.lg', function () {
             console.log("label user");
@@ -199,12 +242,25 @@ import { remote } from 'electron';
             if (checkAccount(false) === false) {
                 return;
             }
+            clearLabelReusult();
             curLabel.normal = true;
-            curLabel.depressed = false;
-            $labelnormal.addClass('lg-label-yesno-selected');
-            $labeldepressed.removeClass('lg-label-yesno-selected');
-            _this.updateTuCao(tucaonormal);
+            $labelnormal.addClass('lg-label-result-selected');
             $labelparts.css('visibility', 'hidden');
+            clearLabelParts();
+            _this.updateTuCao(tucaonormal);
+            writeLabel();
+        });
+        $labeluncertain.on('click.lg', function () {
+            console.log("label uncertain");
+            if (checkAccount(false) === false) {
+                return;
+            }
+            clearLabelReusult();
+            curLabel.uncertain = true;
+            $labeluncertain.addClass('lg-label-result-selected');
+            $labelparts.css('visibility', 'hidden');
+            clearLabelParts();
+            _this.updateTuCao(tucaouncertain);
             writeLabel();
         });
         $labeldepressed.on('click.lg', function () {
@@ -212,19 +268,28 @@ import { remote } from 'electron';
             if (checkAccount(false) === false) {
                 return;
             }
-            curLabel.normal = false;
+            clearLabelReusult();
             curLabel.depressed = true;
-            $labelnormal.removeClass('lg-label-yesno-selected');
-            $labeldepressed.addClass('lg-label-yesno-selected');
+            clearLabelParts();
+            $labeldepressed.addClass('lg-label-result-selected');
             $labelparts.css('visibility', 'visible');
-            writeLabel();
             _this.updateTuCao(tucaodepressed);
+            writeLabel();
         });
 
-        var $labelforehead = $labelBar.find('.lg-label-forehead');
-        var $labeleyes = $labelBar.find('.lg-label-eyes');
-        var $labelmouth = $labelBar.find('.lg-label-mouth');
-        var $labelcheek = $labelBar.find('.lg-label-cheek');
+        $labeliqproblem.on('click.lg', function () {
+            console.log("label iqproblem");
+            if (checkAccount(false) === false) {
+                return;
+            }
+            clearLabelReusult();
+            curLabel.iqproblem = true;
+            clearLabelParts();
+            $labeliqproblem.addClass('lg-label-result-selected');
+            $labelparts.css('visibility', 'visible');
+            _this.updateTuCao(tucaoiqproblem);
+            writeLabel();
+        });
 
         $labelforehead.on('click.lg', function () {
             console.log("label forehead");
@@ -335,9 +400,9 @@ import { remote } from 'electron';
             modal.style.display = "none";
             var userDom = document.getElementById('lg-label-user');
             userDom.innerText = user;
-            if (document.getElementById('login-rememberme').checked === true){
+            if (document.getElementById('login-rememberme').checked === true) {
                 saveUser();
-            }else{
+            } else {
                 clearUser();
             }
             var _this = ($('.lightgallery').data('lightGallery')).modules['label'];
@@ -346,22 +411,22 @@ import { remote } from 'electron';
     }
 
     var app = remote.app;
-    var saveUser = function() {
+    var saveUser = function () {
         userData.user = curUser;
-        fs.writeFile(app.getPath('userData') + '/lg-user.json', JSON.stringify(userData), function(err) {
+        fs.writeFile(app.getPath('userData') + '/lg-user.json', JSON.stringify(userData), function (err) {
             if (err) throw err;
         });
     }
 
-    var clearUser = function() {
+    var clearUser = function () {
         userData.user = "";
-        fs.writeFile(app.getPath('userData') + '/lg-user.json', JSON.stringify(userData), function(err) {
+        fs.writeFile(app.getPath('userData') + '/lg-user.json', JSON.stringify(userData), function (err) {
             if (err) throw err;
         });
     }
 
-    var loadUser = function(){
-        fs.readFile(app.getPath('userData') + '/lg-user.json', function(err, data) {
+    var loadUser = function () {
+        fs.readFile(app.getPath('userData') + '/lg-user.json', function (err, data) {
             if (err) throw err;
             userData = JSON.parse(data);
             curUser = userData.user;
