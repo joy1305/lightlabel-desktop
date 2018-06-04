@@ -557,7 +557,10 @@ getJasmineRequireObj().Env = function(j$) {
       return suite.getFullName() + ' ' + spec.description;
     };
 
-    // TODO: we may just be able to pass in the fn instead of wrapping here
+    // TODO: we may just be able to pass in the fn instead of wrapping here id:6
+    // johney.song
+    // joy1305@gmail.com
+    // https://github.com/joy1305/lightlabel-desktop/issues/16
     var buildExpectationResult = j$.buildExpectationResult,
         exceptionFormatter = new j$.ExceptionFormatter(),
         expectationResultFactory = function(attrs) {
@@ -567,7 +570,10 @@ getJasmineRequireObj().Env = function(j$) {
           return buildExpectationResult(attrs);
         };
 
-    // TODO: fix this naming, and here's where the value comes in
+    // TODO: fix this naming, and here's where the value comes in id:0
+    // johney.song
+    // joy1305@gmail.com
+    // https://github.com/joy1305/lightlabel-desktop/issues/10
     this.catchExceptions = function(value) {
       catchExceptions = !!value;
       return catchExceptions;
@@ -1370,7 +1376,10 @@ getJasmineRequireObj().Expectation = function() {
         expected = expected[0];
       }
 
-      // TODO: how many of these params are needed?
+      // TODO: how many of these params are needed? id:4
+      // johney.song
+      // joy1305@gmail.com
+      // https://github.com/joy1305/lightlabel-desktop/issues/14
       this.addExpectationResult(
         result.pass,
         {
@@ -1378,7 +1387,10 @@ getJasmineRequireObj().Expectation = function() {
           passed: result.pass,
           message: message,
           actual: this.actual,
-          expected: expected // TODO: this may need to be arrayified/sliced
+          expected: expected // TODO: this may need to be arrayified/sliced id:8
+                             // johney.song
+                             // joy1305@gmail.com
+                             // https://github.com/joy1305/lightlabel-desktop/issues/18
         }
       );
     };
@@ -1397,8 +1409,14 @@ getJasmineRequireObj().Expectation = function() {
 
     var expect = new Expectation(options);
 
-    // TODO: this would be nice as its own Object - NegativeExpectation
-    // TODO: copy instead of mutate options
+    // TODO: this would be nice as its own Object - NegativeExpectation id:2
+    // johney.song
+    // joy1305@gmail.com
+    // https://github.com/joy1305/lightlabel-desktop/issues/12
+    // TODO: copy instead of mutate options id:7
+    // johney.song
+    // joy1305@gmail.com
+    // https://github.com/joy1305/lightlabel-desktop/issues/17
     options.isNot = true;
     expect.not = new Expectation(options);
 
@@ -1408,7 +1426,10 @@ getJasmineRequireObj().Expectation = function() {
   return Expectation;
 };
 
-//TODO: expectation result may make more sense as a presentation of an expectation.
+//TODO: expectation result may make more sense as a presentation of an expectation. id:1
+// johney.song
+// joy1305@gmail.com
+// https://github.com/joy1305/lightlabel-desktop/issues/11
 getJasmineRequireObj().buildExpectationResult = function() {
   function buildExpectationResult(options) {
     var messageFormatter = options.messageFormatter || function() {},
@@ -1777,8 +1798,11 @@ getJasmineRequireObj().QueueRunner = function(j$) {
     function handleException(e, queueableFn) {
       onException(e, queueableFn);
       if (!self.catchException(e)) {
-        //TODO: set a var when we catch an exception and
-        //use a finally block to close the loop in a nice way..
+        //TODO: set a var when we catch an exception and id:5
+        // johney.song
+        // joy1305@gmail.com
+        // https://github.com/joy1305/lightlabel-desktop/issues/15
+        // use a finally block to close the loop in a nice way..
         throw e;
       }
     }
@@ -1843,7 +1867,8 @@ getJasmineRequireObj().SpyRegistry = function(j$) {
       }
 
       if (obj[methodName] && j$.isSpy(obj[methodName])) {
-        //TODO?: should this return the current spy? Downside: may cause user confusion about spy state
+        //TODO ?: should this return the current spy? Downside: may cause user confusion about spy state id:9
+        // https://github.com/joy1305/lightlabel-desktop/issues/19
         throw new Error(methodName + ' has already been spied upon');
       }
 
@@ -2288,7 +2313,10 @@ getJasmineRequireObj().StringMatching = function(j$) {
 };
 
 getJasmineRequireObj().matchersUtil = function(j$) {
-  // TODO: what to do about jasmine.pp not being inject? move to JSON.stringify? gut PrettyPrinter?
+  // TODO: what to do about jasmine.pp not being inject? move to JSON.stringify? gut PrettyPrinter? id:3
+  // johney.song
+  // joy1305@gmail.com
+  // https://github.com/joy1305/lightlabel-desktop/issues/13
 
   return {
     equals: function(a, b, customTesters) {
